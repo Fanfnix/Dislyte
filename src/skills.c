@@ -46,7 +46,7 @@ void afficherSkill(WINDOW * win, Skill * skill) {
     if (win != NULL && skill != NULL) {
         int fenetre_skill_width = 40;
         int fenetre_skill_height = 10;
-        WINDOW * fenetre_skill = derwin(win, fenetre_skill_height, fenetre_skill_width, 0, 0);
+        WINDOW * fenetre_skill = derwin(win, fenetre_skill_height, fenetre_skill_width, 0, fenetre_skill_width*skill->id);
         wborder(fenetre_skill, '|', '|', '-', '-', '+', '+', '+', '+');
 
         // Nom

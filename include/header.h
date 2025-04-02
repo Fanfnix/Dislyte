@@ -41,10 +41,9 @@ typedef struct Esper {
     int id;
     char nom[50];
     const struct Stats * base;
-    struct Stats * bonus;
     struct Skill * skills[3];
 } Esper;
 
-Esper * creerEsper(int id, char nom[], const Stats * base, Stats * bonus, Skill * skills[3]);
+Esper * creerEsper(int id, char nom[], const Stats * base, Skill * skills[3]);
 
 #endif
