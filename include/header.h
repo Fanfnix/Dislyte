@@ -6,8 +6,11 @@
 #include <string.h>
 #include <ncurses.h>
 
+
+// SKILLS //
+
 typedef struct Pattern {
-    int ratio;
+    float ratio;
     struct Pattern * next;
 } Pattern;
 
@@ -18,9 +21,21 @@ typedef struct Skill {
     struct Pattern * pattern;
 } Skill;
 
+Pattern * creerPattern(float ratio);
+Pattern * newPattern(float schema[], int l_schema);
+Skill * creerSkill(int id, int id_esper, char nom[], char description[], Pattern * pattern);
+
+
+// STATS //
+
 typedef struct Stats {
     int pv, atk, def, txcrit, degcrit, prec, resist;
 } Stats;
+
+Stats * creerStats(int pv, int ayk, int def, int txcrit, int degcrit, int prec, int resist);
+
+
+// ESPER //
 
 typedef struct Esper {
     int id;
@@ -30,8 +45,6 @@ typedef struct Esper {
     struct Skill * skills[3];
 } Esper;
 
-Skill * creerSkill(int id, int id_esper, char nom[], char description[], int pattern[]);
-Stats * creerStats(int pv, int ayk, int def, int txcrit, int degcrit, int prec, int resist);
 Esper * creerEsper(int id, char nom[], const Stats * base, Stats * bonus, Skill * skills[3]);
 
 #endif
