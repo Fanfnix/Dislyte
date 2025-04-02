@@ -10,8 +10,8 @@
 // SKILLS //
 
 typedef struct Pattern {
-    float ratio;
-    struct Pattern * next;
+    float * schema;
+    int l_schema;
 } Pattern;
 
 typedef struct Skill {
@@ -21,9 +21,9 @@ typedef struct Skill {
     struct Pattern * pattern;
 } Skill;
 
-Pattern * creerPattern(float ratio);
-Pattern * newPattern(float schema[], int l_schema);
-Skill * creerSkill(int id, int id_esper, char nom[], char description[], Pattern * pattern);
+Pattern * creerPattern(float schema[], int l_schema);
+Skill * creerSkill(int id, int id_esper, char nom[], Pattern * pattern);
+void afficherSkill(WINDOW * win, Skill * skill);
 
 
 // STATS //
