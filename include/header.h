@@ -7,7 +7,6 @@
 #include <ncurses.h>
 
 
-
 // FONCTIONS BASE //
 
 void initNcurses();

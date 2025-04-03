@@ -23,9 +23,9 @@ int main() {
 
     afficherEsper(stdscr, esper_0);
 
-    mvwaddstr(stdscr, LINES-2, 2, ">>> Press any to leave");
+    mvwaddstr(stdscr, LINES-2, 2, ">>> Press 'k' to leave");
 
-    while (getch() == -1);
+    while (getch() != 'k');
 
     endwin();
 

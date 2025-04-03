@@ -46,10 +46,11 @@ Skill * creerSkill(int id, int id_esper, char nom[], Pattern * pattern) {
 
 void afficherSkill(WINDOW * win, Skill * skill) {
     if (win != NULL && skill != NULL) {
-        int fenetre_skill_width = 40;
+        int fenetre_skill_width = 38;
         int fenetre_skill_height = 10;
-        WINDOW * fenetre_skill = derwin(win, fenetre_skill_height, fenetre_skill_width, 0, fenetre_skill_width*skill->id);
-        wborder(fenetre_skill, '|', '|', '-', '-', '+', '+', '+', '+');
+        WINDOW * fenetre_skill = derwin(win, fenetre_skill_height, fenetre_skill_width, 14, 1);
+
+        wclear(fenetre_skill);
 
         // Nom
         wattron(fenetre_skill, A_BOLD);
@@ -57,9 +58,9 @@ void afficherSkill(WINDOW * win, Skill * skill) {
         wattroff(fenetre_skill, A_BOLD);
 
         // Description
-        int fenetre_skill_description_width = fenetre_skill_width - 4;
+        int fenetre_skill_description_width = fenetre_skill_width - 2;
         int fenetre_skill_description_height = fenetre_skill_height - 5;
-        WINDOW * fenetre_skill_description = derwin(fenetre_skill, fenetre_skill_description_height, fenetre_skill_description_width, 3, 2);
+        WINDOW * fenetre_skill_description = derwin(fenetre_skill, fenetre_skill_description_height, fenetre_skill_description_width, 3, 1);
         mvwaddstr(fenetre_skill_description, 0, 0, skill->description);
 
         // Pattern
@@ -67,12 +68,11 @@ void afficherSkill(WINDOW * win, Skill * skill) {
         char str[50];
         sprintf(str, "( %.0f%%", 100*skill->pattern->schema[0]);
         for (int i = 1; i < skill->pattern->l_schema; i++) {
-            sprintf(tmp, "%.0f%%", 100*skill->pattern->schema[i]);
-            strcat(str, " / ");
+            sprintf(tmp, " %.0f%%", 100*skill->pattern->schema[i]);
             strcat(str, tmp);
         }
         strcat(str, " )");
-        mvwaddstr(fenetre_skill, fenetre_skill_height-2, 2, str);
+        mvwaddstr(fenetre_skill, fenetre_skill_height-2, 1, str);
 
         // Refresh
         wrefresh(fenetre_skill);

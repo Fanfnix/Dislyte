@@ -14,14 +14,26 @@ Esper * creerEsper(int id, char nom[], const Stats * base, Skill * skills[3]) {
 }
 
 
+void boutonCompetence(WINDOW * competence, int id, int choisi) {
+    char str[10];
+    if (choisi) wattron(competence, A_BOLD);
+    wborder(competence, '|', '|', '-', '-', '+', '+', '+', '+');
+    sprintf(str, "C%d", id);
+    mvwaddstr(competence, 1, 2, str);
+    if (choisi) wattroff(competence, A_BOLD);
+    wrefresh(competence);
+}
+
+
 void afficherEsper(WINDOW * win, Esper * esper) {
     int fenetre_esper_width = 40;
     int fenetre_esper_height = 30;
     WINDOW * fenetre_esper = derwin(win, fenetre_esper_height, fenetre_esper_width, 0, 0);
+    wclear(fenetre_esper);
+    wattron(fenetre_esper, A_BOLD);
     wborder(fenetre_esper, '|', '|', '-', '-', '+', '+', '+', '+');
 
     // Nom
-    wattron(fenetre_esper, A_BOLD);
     mvwaddstr(fenetre_esper, 1, (fenetre_esper_width-strlen(esper->nom))/2, esper->nom);
     wattroff(fenetre_esper, A_BOLD);
 
@@ -40,17 +52,28 @@ void afficherEsper(WINDOW * win, Esper * esper) {
     WINDOW * competence_2 = derwin(fenetre_esper_skills, 3, 6, 0, 13);
     WINDOW * competence_3 = derwin(fenetre_esper_skills, 3, 6, 0, 21);
 
-    wborder(competence_1, '|', '|', '-', '-', '+', '+', '+', '+');
-    wborder(competence_2, '|', '|', '-', '-', '+', '+', '+', '+');
-    wborder(competence_3, '|', '|', '-', '-', '+', '+', '+', '+');
-    
-    mvwaddstr(competence_1, 1, 2, "C1");
-    mvwaddstr(competence_2, 1, 2, "C2");
-    mvwaddstr(competence_3, 1, 2, "C3");
-
-    while (wgetch(fenetre_esper) != 'k') {
-        
-    }
+    int id = 0;
+    char pressed = '\0';
+    do {
+        if (pressed == 'q') id--;
+        if (pressed == 'd') id++;
+        if (id > 2) id = 0;
+        if (id < 0) id = 2;
+        if (id == 0) {
+            boutonCompetence(competence_1, 1, 1);
+            afficherSkill(fenetre_esper, esper->skills[0]);
+        } else boutonCompetence(competence_1, 1, 0);
+        if (id == 1) {
+            boutonCompetence(competence_2, 2, 1);
+            afficherSkill(fenetre_esper, esper->skills[1]);
+        } else boutonCompetence(competence_2, 2, 0);
+        if (id == 2) {
+            boutonCompetence(competence_3, 3, 1);
+            afficherSkill(fenetre_esper, esper->skills[2]);
+        } else boutonCompetence(competence_3, 3, 0);
+        wrefresh(fenetre_esper);
+    } while ((pressed = wgetch(fenetre_esper)) != 'k');
+    wborder(fenetre_esper, '|', '|', '-', '-', '+', '+', '+', '+');
 
     // Refresh
     wrefresh(fenetre_esper);
