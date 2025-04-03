@@ -30,6 +30,7 @@ void afficherEsper(WINDOW * win, Esper * esper) {
     int fenetre_esper_height = 30;
     WINDOW * fenetre_esper = derwin(win, fenetre_esper_height, fenetre_esper_width, 0, 0);
     wclear(fenetre_esper);
+    mvwaddstr(fenetre_esper, fenetre_esper_height-2, 2, "q/d : move | k : leave");
     wattron(fenetre_esper, A_BOLD);
     wborder(fenetre_esper, '|', '|', '-', '-', '+', '+', '+', '+');
 
