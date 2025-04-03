@@ -7,6 +7,12 @@
 #include <ncurses.h>
 
 
+
+// FONCTIONS BASE //
+
+void initNcurses();
+
+
 // SKILLS //
 
 typedef struct Pattern {
@@ -29,10 +35,12 @@ void afficherSkill(WINDOW * win, Skill * skill);
 // STATS //
 
 typedef struct Stats {
-    int pv, atk, def, txcrit, degcrit, prec, resist;
+    int pv, atk, def;
+    float txcrit, degcrit, prec, resist;
 } Stats;
 
-Stats * creerStats(int pv, int ayk, int def, int txcrit, int degcrit, int prec, int resist);
+Stats * creerStats(int pv, int ayk, int def, float txcrit, float degcrit, float prec, float resist);
+void afficherStatsBase(WINDOW * win, const Stats * stats);
 
 
 // ESPER //
@@ -45,5 +53,6 @@ typedef struct Esper {
 } Esper;
 
 Esper * creerEsper(int id, char nom[], const Stats * base, Skill * skills[3]);
+void afficherEsper(WINDOW * win, Esper * esper);
 
 #endif

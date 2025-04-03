@@ -34,7 +34,9 @@ Skill * creerSkill(int id, int id_esper, char nom[], Pattern * pattern) {
         compet->id = id;
         compet->id_esper = id_esper;
         strcpy(compet->nom, nom);
-        strcpy(compet->description, genererDescription(pattern));
+        char * description = genererDescription(pattern);
+        strcpy(compet->description, description);
+        free(description);
         compet->pattern = pattern;
         return compet;
     } else printf("ERR : creerSkill(%d) failed\n", id);
